@@ -123,27 +123,47 @@ class Walker {
 })();
 
 /* ── 4. Easter egg ───────────────────────────────────────────────
-   Click either companion 11 times (total) to reveal the credits.
-   The cursor-reaction makes them stop when you approach, so they're
-   easy to click. Counter resets after each reveal. */
+   Reveal the credits two ways:
+     • 11 clicks on either companion, OR
+     • 22 clicks anywhere on the page.
+   A 5-second buffer after it opens swallows any close attempts, so
+   the rapid clicks that triggered it can't immediately dismiss it.
+   After the buffer, the ✕, a backdrop click, or Esc closes it. */
 (function easterEgg() {
   const egg   = document.getElementById('egg');
   const close = document.getElementById('egg-close');
   if (!egg) return;
 
-  let clicks = 0;
-  const open = () => { egg.hidden = false; };
-  const shut = () => { egg.hidden = true; };
-  const hit  = () => { if (++clicks >= 11) { clicks = 0; open(); } };
+  const BUFFER_MS = 5000;
+  let agentClicks = 0;
+  let anyClicks   = 0;
+  let openedAt    = 0;
 
+  function open() {
+    if (!egg.hidden) return;
+    egg.hidden = false;
+    openedAt = Date.now();
+    agentClicks = 0; anyClicks = 0;        // reset so it won't instantly re-arm
+  }
+  function shut() {
+    if (egg.hidden) return;
+    if (Date.now() - openedAt < BUFFER_MS) return;   // locked during the buffer
+    egg.hidden = true;
+  }
+
+  // Trigger 1: 11 clicks on either companion.
   ['bruce', 'jazz'].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.style.pointerEvents = 'auto';   // clickable (kept cursor default so it stays secret)
-    el.addEventListener('click', hit);
+    el.style.pointerEvents = 'auto';   // clickable (cursor stays default so it's a secret)
+    el.addEventListener('click', () => { if (egg.hidden && ++agentClicks >= 11) open(); });
   });
 
-  if (close) close.addEventListener('click', shut);
-  egg.addEventListener('click', e => { if (e.target === egg) shut(); });   // click backdrop to dismiss
+  // Trigger 2: 22 clicks anywhere on the page.
+  document.addEventListener('click', () => { if (egg.hidden && ++anyClicks >= 22) open(); });
+
+  // Close — only honoured once the 5s buffer has elapsed.
+  if (close) close.addEventListener('click', e => { e.stopPropagation(); shut(); });
+  egg.addEventListener('click', e => { if (e.target === egg) shut(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
 })();

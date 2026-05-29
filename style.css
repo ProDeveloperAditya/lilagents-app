@@ -38,15 +38,17 @@ body {
 /* ── Top bar ───────────────────────────────────────────── */
 .topbar {
   position: fixed; top: 0; left: 0; right: 0; z-index: 6;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 26px 38px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  padding: 20px 38px;
 }
-.wordmark { font-weight: 900; letter-spacing: -0.03em; font-size: 1.12rem; color: var(--ink); }
-.wordmark::before {
-  content: ""; display: inline-block; width: 9px; height: 9px; margin-right: 9px;
-  border-radius: 50%; background: linear-gradient(135deg, var(--bruce), var(--jazz)); vertical-align: middle;
+.brand-logo { justify-self: start; display: inline-flex; }
+.brand-logo img { height: 30px; width: auto; display: block; }
+.wordmark {
+  justify-self: center;
+  font-weight: 900; letter-spacing: -0.03em; font-size: 1.12rem; color: var(--ink);
 }
 .nav-meta {
+  justify-self: end;
   font-family: 'JetBrains Mono', ui-monospace, monospace;
   font-size: 0.74rem; color: var(--faint); letter-spacing: 0.02em;
 }
@@ -225,8 +227,9 @@ body {
 
 /* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 640px) {
-  .topbar { padding: 18px 22px; }
+  .topbar { padding: 16px 20px; }
   .nav-meta { display: none; }
+  .brand-logo img { height: 24px; }
   #bruce { width: 79px; height: 102px; background-size: 3081px 102px; }
   #jazz  { width: 87px; height: 94px;  background-size: 2349px 94px; }
   @keyframes walk-bruce { from { background-position: 0 0; } to { background-position: -3081px 0; } }
