@@ -41,12 +41,12 @@ body {
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 20px 38px;
 }
-.brand-left { justify-self: start; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.brand-left { justify-self: start; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .brand-logo { display: inline-flex; }
 .brand-logo img { height: 30px; width: auto; display: block; }
 .brand-by {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.62rem; color: var(--faint); letter-spacing: 0.04em;
+  font-size: 0.75rem; color: var(--dim); letter-spacing: 0.03em;
 }
 .wordmark {
   justify-self: center;
