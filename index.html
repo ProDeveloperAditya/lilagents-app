@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lil agents — tiny AI companions for your taskbar</title>
+  <meta name="description" content="Two little AI companions that live on your Windows taskbar." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Soft ambient light. -->
+  <div class="orbs" aria-hidden="true">
+    <span class="orb o1"></span>
+    <span class="orb o2"></span>
+  </div>
+
+  <header class="topbar">
+    <span class="wordmark">lil&nbsp;agents</span>
+    <span class="nav-meta">AI desktop companions</span>
+  </header>
+
+  <main class="hero">
+    <p class="eyebrow">for windows&nbsp;·&nbsp;v1.0</p>
+    <h1>Two tiny AI&nbsp;companions<br />that live on your <span class="grad">taskbar</span>.</h1>
+    <p class="sub">Meet <b class="bruce-text">Bruce</b> &amp; <b class="jazz-text">Jazz</b> — they walk around while you work.</p>
+
+    <a class="download-btn" id="dl" href="https://github.com/ProDeveloperAditya/lilagents-app/releases/latest/download/LilAgents-bundle.zip">
+      <span class="dl-icon" aria-hidden="true">↓</span>
+      <span class="dl-text">Download the app</span>
+    </a>
+
+    <p class="count" id="count-line"><span id="count">—</span> downloads</p>
+  </main>
+
+  <!-- A faux taskbar the companions walk along. -->
+  <div class="taskbar" aria-hidden="true">
+    <div class="ground"></div>
+    <div class="tb-apps">
+      <span class="tb-app"></span><span class="tb-app"></span><span class="tb-app"></span>
+      <span class="tb-app"></span><span class="tb-app"></span>
+    </div>
+    <span class="tb-clock">Windows&nbsp;11</span>
+  </div>
+
+  <!-- Walking companions: sprite-sheet divs, positions driven by app.js. -->
+  <div class="pet" id="bruce" aria-hidden="true"></div>
+  <div class="pet" id="jazz"  aria-hidden="true"></div>
+
+  <!-- Grain for a premium, non-flat white. -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
