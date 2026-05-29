@@ -121,21 +121,3 @@ class Walker {
   });
   btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
 })();
-
-/* ── 4. Live download count (GitHub's real release download tally) ──
-   No backend: GitHub counts every release-asset download. We read that
-   public number and sum it across all releases/assets. */
-(async function loadCount() {
-  const el = document.getElementById('count');
-  if (!el) return;
-  try {
-    const res = await fetch(
-      'https://api.github.com/repos/ProDeveloperAditya/lilagents-app/releases',
-      { headers: { Accept: 'application/vnd.github+json' } });
-    if (!res.ok) return;
-    const releases = await res.json();
-    let total = 0;
-    for (const r of releases) for (const a of (r.assets || [])) total += a.download_count || 0;
-    el.textContent = total.toLocaleString();
-  } catch (_) { /* rate-limited / offline — leave the placeholder */ }
-})();

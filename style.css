@@ -104,11 +104,12 @@ body {
 .download-btn .dl-icon { font-size: 1.1rem; font-weight: 900; animation: nudge 1.8s ease-in-out infinite; }
 @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
 
-.count {
-  margin-top: 22px; font-size: 0.9rem; color: var(--dim); font-weight: 500;
-  opacity: 0; animation: rise 0.8s 0.36s cubic-bezier(0.22,1,0.36,1) forwards;
+/* Bottom-left credit, styled to match the taskbar clock. */
+.made {
+  position: fixed; left: 24px; bottom: 21px; z-index: 3;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.72rem; color: var(--faint); letter-spacing: 0.02em;
 }
-.count #count { color: var(--ink); font-weight: 800; }
 
 /* ── Faux taskbar ──────────────────────────────────────── */
 .taskbar {
