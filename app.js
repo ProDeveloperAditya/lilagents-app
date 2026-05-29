@@ -121,3 +121,29 @@ class Walker {
   });
   btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
 })();
+
+/* ── 4. Easter egg ───────────────────────────────────────────────
+   Click either companion 11 times (total) to reveal the credits.
+   The cursor-reaction makes them stop when you approach, so they're
+   easy to click. Counter resets after each reveal. */
+(function easterEgg() {
+  const egg   = document.getElementById('egg');
+  const close = document.getElementById('egg-close');
+  if (!egg) return;
+
+  let clicks = 0;
+  const open = () => { egg.hidden = false; };
+  const shut = () => { egg.hidden = true; };
+  const hit  = () => { if (++clicks >= 11) { clicks = 0; open(); } };
+
+  ['bruce', 'jazz'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.pointerEvents = 'auto';   // clickable (kept cursor default so it stays secret)
+    el.addEventListener('click', hit);
+  });
+
+  if (close) close.addEventListener('click', shut);
+  egg.addEventListener('click', e => { if (e.target === egg) shut(); });   // click backdrop to dismiss
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+})();

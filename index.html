@@ -45,6 +45,20 @@
 
   <div class="made">Made in Patliputra</div>
 
+  <!-- Easter egg: revealed after 11 clicks on either companion (see app.js). -->
+  <div class="egg-backdrop" id="egg" hidden>
+    <div class="egg-card" role="dialog" aria-modal="true" aria-label="The team behind lil agents">
+      <button class="egg-close" id="egg-close" aria-label="Close">&times;</button>
+      <p class="egg-label">the team behind lil&nbsp;agents</p>
+      <p class="egg-lead">Aditya Raj</p>
+      <ul class="egg-names">
+        <li>Harshit</li>
+        <li>Pratosh</li>
+        <li>Utkarsh</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- Walking companions: sprite-sheet divs, positions driven by app.js. -->
   <div class="pet" id="bruce" aria-hidden="true"></div>
   <div class="pet" id="jazz"  aria-hidden="true"></div>

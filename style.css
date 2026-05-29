@@ -76,6 +76,11 @@ body {
   background-size: 200% 100%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
   animation: hue 8s ease-in-out infinite;
+  /* inline-block + right padding stops the last glyph ("r") being clipped
+     by background-clip:text; negative margin keeps the period tight. */
+  display: inline-block;
+  padding-right: 0.08em;
+  margin-right: -0.06em;
 }
 .sub {
   color: var(--dim); font-size: clamp(1rem, 2.3vw, 1.28rem); font-weight: 500; margin-bottom: 42px;
@@ -167,6 +172,50 @@ body {
   background: radial-gradient(closest-side, rgba(14,15,19,0.20), transparent);
   filter: blur(1px);
 }
+
+/* ── Easter-egg credits popup ──────────────────────────── */
+.egg-backdrop {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(14,15,19,0.45);
+  backdrop-filter: blur(7px); -webkit-backdrop-filter: blur(7px);
+  animation: egg-fade 0.25s ease;
+}
+.egg-backdrop[hidden] { display: none; }
+.egg-card {
+  position: relative;
+  background: #fff; border-radius: 24px;
+  padding: 46px 64px; text-align: center;
+  box-shadow: 0 30px 90px rgba(14,15,19,0.30);
+  animation: egg-pop 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.egg-card::before {
+  content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1.5px;
+  background: linear-gradient(120deg, var(--bruce), var(--accent), var(--jazz));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+}
+.egg-label {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  text-transform: uppercase; letter-spacing: 0.3em; font-size: 0.68rem;
+  color: var(--dim); margin-bottom: 16px;
+}
+.egg-lead {
+  font-size: 1.7rem; font-weight: 900; letter-spacing: -0.02em; margin-bottom: 12px;
+  background: linear-gradient(100deg, var(--bruce), var(--accent) 55%, var(--jazz));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  display: inline-block; padding-right: 0.06em;
+}
+.egg-names { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+.egg-names li { font-size: 1.12rem; font-weight: 600; color: var(--text); }
+.egg-close {
+  position: absolute; top: 12px; right: 16px;
+  border: none; background: none; font-size: 1.5rem; line-height: 1;
+  color: var(--faint); cursor: pointer; transition: color 0.15s;
+}
+.egg-close:hover { color: var(--ink); }
+@keyframes egg-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes egg-pop  { from { opacity: 0; transform: translateY(12px) scale(0.96); } to { opacity: 1; transform: none; } }
 
 /* ── Grain ─────────────────────────────────────────────── */
 .grain {
